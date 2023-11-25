@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TLD Finder</title>
+    <style>
+        #results {
+            margin-top: 20px;
+        }
+        #results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #results li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>TLD Finder</h1>
+        <form id="search-form">
+            <input type="text" id="tld-input" placeholder="Enter TLD (e.g., .com)">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div id="results">
+        <ul id="results-list"></ul>
+    </div>
+
+    <script src="main.js"></script>
+
+    <script>
+    // Cache DOM elements
+    const searchForm = document.getElementById('search-form');
+    const tldInput = document.getElementById('tld-input');
+    const resultsList = document.getElementById('results-list');
+    
+    // Attach event listener to parent element using event delegation
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const tld = tldInput.value;
+        
+        findWebsitesFromTLD(tld).then(function(results) {
+            resultsList.innerHTML = ''; // Clear previous results
+            
+            // Use textContent directly for performance
+            results.forEach(function(result) {
+                const listItem = document.createElement('li');
+                listItem.textContent = result;
+                resultsList.appendChild(listItem);
+                resultsList.appendChild(document.createElement('br'));
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+
