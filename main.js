@@ -5,7 +5,7 @@
  * @returns {Promise<string[]>} - A promise that resolves to an array of website URLs.
  */
 async function findWebsitesFromTLD(TLD) {
-    const searchURL = `https://html.duckduckgo.com/html/?q=site:www.${TLD}`;
+    const searchURL = 'https://corsproxy.io/?' + encodeURIComponent(`https://html.duckduckgo.com/html/?q=site:www.${TLD}`); // apparantly duckduckgo is unhappy with cors
     console.log('Searching URL:', searchURL);
 
     const response = await fetch(searchURL);
